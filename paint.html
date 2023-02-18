@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>paint</title>
+</head>
+<body>
+     <canvas id="canvas"></canvas>
+    <script>
+	    var draw=document.getElementById("canvas")
+		var ctx=draw.getContext("2d");
+		let isDrawing=false;
+		draw.width=window.innerwidth;
+		draw.height=window.innerHeight;
+		draw.addEventListener("mousedown",(e)=>{
+		     isDrawing=true
+			  x = e.offsetX;
+              y = e.offsetY;
+		})
+		
+		draw.addEventListener("mousemove",(e)=>{
+			 if (isDrawing) {
+				drawLine(ctx, x, y, e.offsetX, e.offsetY);
+				x = e.offsetX;
+				y = e.offsetY;
+			  }
+		})
+		draw.addEventListener("mouseup",(e)=> {
+		if (isDrawing) {
+			drawLine(ctx, x, y, e.offsetX, e.offsetY);
+			x = 0;
+			y = 0;
+			isDrawing = false;
+			}
+        })
+		
+		function drawLine(ctx, x1, y1, x2, y2) {
+		 ctx.beginPath();
+		  ctx.strokeStyle = 'black';
+		  ctx.lineWidth = 1;
+		  ctx.moveTo(x1, y1);
+		  ctx.lineTo(x2, y2);
+		  ctx.stroke();
+		  ctx.closePath();
+        }
+		
+	</script>
+</body>
+</html>
